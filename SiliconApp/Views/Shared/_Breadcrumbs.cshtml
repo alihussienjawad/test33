@@ -1,0 +1,35 @@
+﻿@model List<Breadcrumb>
+@if (Model != null)
+{
+    <nav aria-label="breadcrumb" style="background-color:transparent; color:white;padding:40px 0 0 50px">
+        <ol class="breadcrumb  justify-content-center justify-content-md-start justify-content-lg-start justify-content-xl-start" style="background-color:transparent;">
+            @foreach (var breadcrumb in Model)
+            {
+                if (breadcrumb.Text == "Home")
+                {
+                 
+                    if (breadcrumb.Active)
+                    {
+                        <li class="breadcrumb-item active">   <a asp-action="@breadcrumb.Action" asp-controller="@breadcrumb.Controller"><i class="fa-solid fa-house" style="margin-right:5px;"></i>@breadcrumb.Text</a> </li>
+                    }
+                    else
+                    {
+                        <li class="breadcrumb-item" aria-current="page">   <i class="fa-solid fa-house"></i>@breadcrumb.Text</li>
+                    }
+                }
+                else
+                {
+                    if (breadcrumb.Active)
+                    {
+                        <li class="breadcrumb-item active"><a asp-action="@breadcrumb.Action" asp-controller="@breadcrumb.Controller">@breadcrumb.Text</a> </li>
+                    }
+                    else
+                    {
+                        <li class="breadcrumb-item" aria-current="page">@breadcrumb.Text</li>
+                    }
+                }
+             
+            }
+        </ol>
+    </nav>
+}

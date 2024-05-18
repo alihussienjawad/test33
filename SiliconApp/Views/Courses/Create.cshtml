@@ -1,0 +1,250 @@
+﻿@model SiliconApp.Models.Course
+
+@{
+    ViewData["Title"] = "Create";
+ 
+
+}
+
+ 
+
+<h4>Add Course</h4>
+<hr />
+<form asp-action="Create" id="courseInsertForm" enctype="multipart/form-data">
+    <div class="row d-flex justify-content-between">
+    <div class="col-md-5">
+            <h5 class="details-title">Course Information</h5>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class ="form-select" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseName" class="control-label"></label>
+                <input asp-for="CourseName" class="form-control" />
+                <span asp-validation-for="CourseName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriceAfterDiscount" class="control-label"></label>
+                <input asp-for="PriceAfterDiscount" class="form-control" />
+                <span asp-validation-for="PriceAfterDiscount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfHours" class="control-label"></label>
+                <input asp-for="NumberOfHours" class="form-control" />
+                <span asp-validation-for="NumberOfHours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DowinloadResource" class="control-label"></label>
+                <input asp-for="DowinloadResource" class="form-control" />
+                <span asp-validation-for="DowinloadResource" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate" class="control-label"></label>
+                <input hidden asp-for="Rate" class="form-control rating" />
+                <span onclick="gfg(1)"
+                      class="star">
+                    ★
+                </span>
+                <span onclick="gfg(2)"
+                      class="star">
+                    ★
+                </span>
+                <span onclick="gfg(3)"
+                      class="star">
+                    ★
+                </span>
+                <span onclick="gfg(4)"
+                      class="star">
+                    ★
+                </span>
+                <span onclick="gfg(5)"
+                      class="star">
+                    ★
+                </span>
+                <h6 id="output">
+                    Rating is: 0/5
+                </h6>
+                <span asp-validation-for="Rate" class="text-danger"></span>
+            </div>
+ 
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label"></label>
+                <input hidden asp-for="ImagePath" class="form-control" />
+                <input required type="file" asp-for="ImageFile" class="form-control" onchange="UploadImage(this)" />
+                <img src="~/Img/upload.png" id="courseImg" class="w-100" height="200"/>
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CoursDec" class="control-label"></label>
+                <textarea asp-for="CoursDec" class="form-control" style="height:120px;resize:none"></textarea>
+                <span asp-validation-for="CoursDec" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aritc" class="control-label"></label>
+                <input asp-for="Aritc" class="form-control" />
+                <span asp-validation-for="Aritc" class="text-danger"></span>
+            </div>
+ 
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Time" /> @Html.DisplayNameFor(model => model.Time)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Certifacate" /> @Html.DisplayNameFor(model => model.Certifacate)
+                </label>
+            </div>
+       
+       
+    </div>
+ <div class="col-md-5">
+     <div class="row">
+                <div class="col-md-12">
+                    <h5 class="details-title">What you ll learn</h5>
+                    <div class="row srcoll-row">
+                        <table class="table table-borderd" id="courseLearnTbl">
+                            <thead class="st-header">
+                                <tr>
+                                    <th hidden><input hidden id="courseLearnTblhdnLastIndex" value="0" /></th>
+                                    <th>@Html.DisplayNameFor(Model => Model.CourseLearns[0].Name)</th>
+                                    <th style="text-align:right">
+                                        <a id="courseLearnTbl_btnadd" class="btn btn-sm btn-primary visible" onclick="AddItem(this,'courseLearnTbl')">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.CourseLearns.Count; i++)
+                                {
+                                    <tr>
+                                        <td style="vertical-align:middle">
+                                            <div class="form-group">
+                                                <input asp-for="@Model.CourseLearns[i].Name" class="form-control" />
+                                                <span asp-validation-for="@Model.CourseLearns[i].Name" class="text-danger"></span>
+                                            </div>
+                                        </td>
+
+                                        <td style="vertical-align:middle;text-align:right">
+                                            <a id="courseLearnTbl_btnremove-@i" class="btn btn-sm btn-danger visible" onclick="DeleteItem(this,'courseLearnTbl')">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h5 class="details-title">Teachers</h5>
+                    <div class="row p-2 srcoll-row">
+                        <table class="table table-borderd" id="courseTeacherTbl">
+                            <thead class="st-header">
+                                <tr>
+                                    <th hidden><input hidden id="courseTeacherTblhdnLastIndex" value="0" /></th>
+                                    <th>@Html.DisplayNameFor(Model => Model.TeacherCourses[0].TeacherId)</th>
+                                    <th style="text-align:right">
+                                        <a id="courseTeacherTbl_btnadd" class="btn btn-sm btn-primary visible" onclick="AddItem(this,'courseTeacherTbl')">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </a>
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int j = 0; j < Model.TeacherCourses.Count; j++)
+                                {
+
+                                    <tr>
+
+                                        <td style="vertical-align:middle">
+                                            <div class="form-group">
+                                                <select asp-for="@Model.TeacherCourses[j].TeacherId" class="form-select" asp-items="@Model.selectListItems[j]"></select>
+                                                <span asp-validation-for="@Model.TeacherCourses[j].TeacherId" class="text-danger"></span>
+                                            </div>
+                                        </td>
+
+                                        <td style="vertical-align:middle;text-align:right">
+                                            <a id="courseTeacherTbl_btnremove-@j" class="btn btn-sm btn-danger visible" onclick="DeleteItem(this,'courseTeacherTbl')">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <h5 class="details-title">Program Details</h5>
+                    <div class="row srcoll-row">
+                        <table class="table table-borderd" id="courseDetailTbl">
+                            <thead class="st-header">
+                                <tr>
+                                    <th hidden><input hidden id="courseDetailTblhdnLastIndex" value="0" /></th>
+                                    <th>@Html.DisplayNameFor(Model => Model.CourseDetails[0].Name)</th>
+                                    <th>@Html.DisplayNameFor(Model => Model.CourseDetails[0].Description)</th>
+                                    <th style="text-align:right">
+                                        <a id="courseDetailTbl_btnadd" class="btn btn-sm btn-primary visible" onclick="AddItem(this,'courseDetailTbl')">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </a>
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int k = 0; k < Model.CourseDetails.Count; k++)
+                                {
+
+                                    <tr>
+
+                                        <td style="vertical-align:middle">
+                                            <div class="form-group">
+                                                <input asp-for="@Model.CourseDetails[k].Name" class="form-control" />
+                                                <span asp-validation-for="@Model.CourseDetails[k].Name" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td style="vertical-align:middle;">
+                                            <div class="form-group">
+                                                <textarea asp-for="@Model.CourseDetails[k].Description" class="form-control" style="height:30;resize:none;"></textarea>
+                                                <span asp-validation-for="@Model.CourseDetails[k].Description" class="text-danger"></span>
+                                            </div>
+                                        </td>
+                                        <td style="vertical-align:middle;text-align:right">
+                                            <a id="courseDetailTbl_btnremove-@k" class="btn btn-sm btn-danger visible" onclick="DeleteItem(this,'courseDetailTbl')">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+     </div>
+ </div>
+
+</div>
+    <div class="form-group mt-5 w-100 text-center">
+        <input type="submit" value="Add" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-warning">Cancel</a>
+    </div>
+</form>
+ <hr />
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using SiliconApp.Models
+@inject SignInManager<ApplicationUser> SignInManager
+ 
+@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+ 
+
+<div>
+  
+    <div class="row mt-5 p-5">
+        <div class="col-md-3 col-sm-12" style="padding-left:3rem;">
+            <partial name="_ManageNav" />
+         
+        </div>
+        <div class="col-md-8 col-sm-12" style="padding-left:6rem;">
+ 
+            @RenderBody() 
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

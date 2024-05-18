@@ -1,0 +1,111 @@
+﻿@page "{handler?}"
+@model IndexModel
+@{
+    ViewData["Title"] = "Account Details";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-10">
+        <p>Basic Info</p>
+        <form id="profile-form" method="post" asp-page-handler="Insert">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <input type="hidden" asp-for="Username"/>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.FirstName" class="form-control" placeholder="Enter Your First Name" />
+                        <label asp-for="Input.FirstName" class="form-label"></label>
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.LastName" class="form-control" placeholder="Enter Your Last Name" />
+                        <label asp-for="Input.LastName" class="form-label"></label>
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Email" class="form-control" placeholder="Enter Your Email" disabled />
+                        <label asp-for="Input.Email" class="form-label"></label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
+                        <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea asp-for="Input.Bio" class="form-control" placeholder="Enter Your Bio (Optional)" style="height:150px;resize:none"> </textarea>
+                <label asp-for="Input.Bio" class="form-label"></label>
+            </div>
+            <a href="/Home/index" class="btn btn-sm btn-outline-info">Cancel</a>
+            <button id="update-profile-button" type="submit"   class=" btn btn-sm btn-primary">Save Change</button>
+           
+        </form>
+        <hr/>
+
+    </div>
+
+    <div class="col-md-10">
+        <p>Address</p>
+        <form id="profile-form2" method="post" asp-page-handler="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <input type="hidden" asp-for="Username" />
+             
+                    <div class="form-floating mb-3">
+                <input asp-for="Input.Address1" class="form-control" placeholder="Enter Your Address1" />
+                <label asp-for="Input.Address1" class="form-label"></label>
+                <span asp-validation-for="Input.Address1" class="text-danger"></span>
+                    </div>
+                
+                    <div class="form-floating mb-3">
+                <input asp-for="Input.Address2" class="form-control" placeholder="Enter Your Address2" />
+                <label asp-for="Input.Address2" class="form-label"></label>
+                <span asp-validation-for="Input.Address2" class="text-danger"></span>
+                    </div>
+        
+        
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.PostalCode" class="form-control" placeholder="Enter Your PostalCode" />
+                        <label asp-for="Input.PostalCode" class="form-label"></label>
+                        <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.City" class="form-control" placeholder="Enter Your City" />
+                        <label asp-for="Input.City" class="form-label"></label>
+                        <span asp-validation-for="Input.City" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+          
+            <a href="/Home/index" class="btn btn-sm btn-outline-info">Cancel</a>
+            <button id="" type="submit" class=" btn btn-sm btn-primary">Save Change</button>
+
+        </form>
+     
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+    
+    </script>
+}

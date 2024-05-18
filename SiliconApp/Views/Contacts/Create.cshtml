@@ -1,0 +1,112 @@
+﻿@using SiliconApp.Controllers
+@model SiliconApp.Models.Contact
+
+@{
+    ViewData["Title"] = "Create";
+ 
+}
+
+ <style>
+   
+
+    .map-container{
+     
+      min-width:99vw;
+      margin-left:-8.8%;
+      left:0
+    }
+
+    
+ </style>
+ 
+<div class="row contact-container w-100 ">
+    <div class="col-12 p-0 m-0">
+        <div class="row contact-us">
+            <div class="col-12 contact-us-details  m-0 ">
+                <div class="row">
+                    <div class="col-12" style="margin-left:2rem;">
+                        <h3 class="contact-up-main-title">Contact Us</h3>
+                    </div>
+                    <div class="col-12 mt-5">
+                        <div class="row">
+                            <div class="col-1 text-right ">
+                                <img class="contact-us-img" src="~/Img/2.png" width="50" height="50" loading="lazy"/>
+                            </div>
+                            <div class="col-3 text-left">
+                                <h5 style="font-weight:600;">Email Us</h5>
+                                <p style="font-weight:100;font-family:Arial;font-size:14px;">
+                                    Please feel free to drop us a line. We will
+                                    respond as soon as possible.
+                                </p>
+                                <a href="#" class="contact-link">Leave a message <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-1 text-right">
+                                <img class="contact-us-img" src="~/Img/2.png" width="50" height="50" loading="lazy" />
+                            </div>
+                            <div class="col-3 text-left">
+                                <h5 style="font-weight:600;">Careers</h5>
+                                <p style="font-weight:100;font-family:Arial;font-size:14px;">
+                                    Sit ac ipsum leo lorem magna nunc mattis
+                                    maecenas non vestibulum.
+                                </p>
+                                <a href="#" class="contact-link">Send an application <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 contact-form m-4">
+                <div class="row p-5">
+                    <div class="col-md-12">
+                        <h5 class="contact-us-title mb-3">Get In Contact With Us</h5>
+                        <form asp-action="Create" >
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group mt-2">
+                                <label asp-for="FullName" class="control-label"></label>
+                                <input asp-for="FullName" class="form-control" />
+                                <span asp-validation-for="FullName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label asp-for="ServiceId" class="control-label"></label>
+                                <select asp-for="ServiceId" class="form-control" asp-items="ViewBag.ServiceId"></select>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label asp-for="Message" class="control-label"></label>
+                                <textarea asp-for="Message" class="form-control" style="height:150px;resize: none;"></textarea>
+
+                                <span asp-validation-for="Message" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn mt-4 btn-send-contact">Send Contact Request</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="map-container">
+
+        <iframe style="width:100%" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d213661.07972519103!2d44.4592505!3d33.2021824!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2siq!4v1711760830695!5m2!1sen!2siq" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+    </div>
+</div>
+
+
+
+
+ 
+
+
+ 
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

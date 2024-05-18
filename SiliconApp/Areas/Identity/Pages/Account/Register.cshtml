@@ -1,0 +1,80 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row d-flex justify-content-center mt-5 ">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+            <div class="row d-flex justify-content-center">
+                <div class="col-12">
+                    <h2 >Create Account.</h2>
+                    <p class="text-muted">
+                        Already have an account? 
+                        <a  asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Sign in here.</a>
+                    </p>
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                    <p class="para4">First Name</p>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.FirstName" class="form-control" aria-required="true" placeholder="Enter Your First Name" />
+                        <label asp-for="Input.FirstName" style="font-size:14px">Enter Your First Name</label>
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                        </div>
+                        <div class="col-6">
+                    <p class="para4">Last Name</p>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.LastName" class="form-control" aria-required="true" placeholder="Enter Your Last Name" />
+                        <label asp-for="Input.LastName" style="font-size:14px">Enter Your Last Name</label>
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                        </div>
+                    </div>
+                   
+
+                    <p class="para4">Email address</p>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email">Enter your email address </label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+
+                    <p class="para4">Password</p>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="" />
+                        <label asp-for="Input.Password"></label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <p class="para4">Confirm password</p>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="" />
+                        <label asp-for="Input.ConfirmPassword"></label>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-1">
+                        <input type="checkbox" id="termsCheckbox" name="termsCheckbox">
+                        <label for="termsCheckbox">I agree to the Terms and Conditions</label>
+                    </div>
+
+
+                      <button id="registerSubmit" type="submit" class="w-100 btn btn-md btn-primary submit-btn  mt-1 disabled">
+                        Sign up
+                    </button>
+
+        </form>
+    </div>
+
+</div>
+ 

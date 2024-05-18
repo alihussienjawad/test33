@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ApplicationUser>
+@{
+    ViewBag.tile = "Index";
+    int counter = 0;
+
+}
+<h5 class="w-100 text-center">Users</h5>
+<div class="row m-2 p-5">
+    <div class="col-12">
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model=>model.Id)</th>
+                    <th>@Html.DisplayNameFor(model=>model.PersonImg)</th>
+                    <th>@Html.DisplayNameFor(model=>model.FullName)</th>
+                    <th>@Html.DisplayNameFor(model=>model.Email)</th>
+                    <th>@Html.DisplayNameFor(model=>model.Address1)</th>
+                    <th>@Html.DisplayNameFor(model=>model.Address2)</th>
+                    <th>@Html.DisplayNameFor(model=>model.Bio)</th>
+                    <th>@Html.DisplayNameFor(model=>model.PostalCode)</th>
+                    <th>@Html.DisplayNameFor(model=>model.City)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    counter++;
+                    <tr>
+                        <td>@counter</td>
+                        <td>
+                            <img src="@item.PersonImg" style="width:50px;height:50px;border-radius:100%" alt="person Image"/>
+                        </td>
+                        <td>
+                            @item.FullName
+                        </td>
+                        <td>
+                           @item.Email
+                        </td>
+                        <td>
+                            @item.Address1
+                        </td>
+                        <td>
+                            @item.Address2
+                        </td>
+                        <td>
+                            @item.Bio
+                        </td>
+                        <td>
+                            @item.PostalCode
+                        </td>
+                        <td>
+                            @item.City
+                        </td>
+                        <td>
+                            <a asp-action="EditRole" asp-route-id="@item.Id" class="btn btn-sm btn-outline-success">Edit Roles</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

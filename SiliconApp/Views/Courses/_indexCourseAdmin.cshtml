@@ -1,0 +1,90 @@
+﻿@model IEnumerable<SiliconApp.Models.Course>
+
+
+<h1>Courses</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-md btn-primary">Add New Course</a>
+</p>
+
+ 
+<table class="table table-bordered table-striped table-hover  table-responsive">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriceAfterDiscount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberOfLikes)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CoursDec)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aritc)
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceAfterDiscount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfLikes)
+                </td>
+
+                <td class="text-break">
+                    @Html.DisplayFor(modelItem => item.CoursDec)
+                </td>
+
+                <td class="text-break">
+                    @Html.DisplayFor(modelItem => item.Aritc)
+                </td>
+
+
+                <td class="w-25">
+                    <a asp-action="Edit" asp-route-id="@item.CourseId" class="btn btn-sm btn-outline-info">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CourseId" class="btn btn-sm btn-outline-success">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CourseId" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,49 @@
+﻿ 
+@using SiliconApp.Models
+ 
+@inject SignInManager<ApplicationUser> SignInManager
+ 
+@* @{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+} *@
+<div class="row m-3">
+    <div class="col-12 w-100 mt-2 text-center" >
+        <form id="per-img-form" method="post" asp-page-handler="UpdatePersonImg" enctype="multipart/form-data" style="position:relative">
+            <input type="file" hidden name="InputFile" id="imgupload" />
+            <img id="per-img" class="fill" src="@ViewBag.perImg" width="70" height="70" style="border-radius:100%;" alt="UserImage">
+            
+          </img>
+            <a href="javascript:void(0)" onclick="LoadPersonImg()">
+                <i class="fa-solid fa-rotate" style="cursor:pointer;position:absolute;bottom:0;left:60%;background-color:whitesmoke;border-radius:100%"></i>
+            </a>
+        </form>
+    </div>
+    <div class="col-12 mt-2">
+        <h6 class="w-100 text-center">@ViewBag.fullName</h6>
+    </div>
+    <div class="col-12">
+        <p class="text-muted w-100 text-center">
+            @ViewBag.UserName
+        </p>
+        </div>
+</div>
+<ul class="nav nav-pills flex-column">
+  
+    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Account Details</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Security</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.SavedCoursesNavClass(ViewContext)" id="savedcourses" asp-page="./SavedCourses">Saved Courses</a></li>
+    <li class="nav-item">
+        <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button class="nav-link" type="submit"  >
+                Sign Out
+            </button>
+        </form>
+    </li>
+   @*  <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Security</a></li> *@
+@*     @if (hasExternalLogins)
+    {
+        <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></li>
+    }
+    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
+    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li> *@
+</ul>

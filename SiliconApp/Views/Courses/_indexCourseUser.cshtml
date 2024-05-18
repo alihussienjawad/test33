@@ -1,0 +1,136 @@
+﻿@using SiliconApp.Controllers
+@model IEnumerable<SiliconApp.Models.Course>
+
+@{
+    string CourseBy = "";
+    List<Breadcrumb> Breadcrumbs = new()
+    {
+        new Breadcrumb("Home", nameof(HomeController.Index), "Home", true),
+        new Breadcrumb("Courses", nameof(CoursesController.Index), "Courses", false),
+
+    };
+}
+<partial name="_Breadcrumbs" model="@Breadcrumbs"/>
+<div class="row  m-5">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <h3>Courses</h3>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <select name="CourseCategory" id="CourseCategory" class="form-select" asp-items="ViewBag.categories" onchange="$('#form-course').trigger('submit');">
+                    <option value="0">All categories</option>
+                </select>
+            </div>
+            <div class="col-md-3 col-sm-6" style="position:relative">
+                <input name="SearchCourse" id="SearchCourse" placeholder="Search Courses" class="form-control" value="@ViewBag.SearchCourse" />
+                <a style="position:absolute;right:15px;top:2px; cursor:pointer" onclick="$('#form-course').trigger('submit');">
+                    <i class="fa-solid fa-magnifying-glass fa-2x"></i>
+                </a>
+            </div>
+        </div>
+        <div class="row main-card">
+    
+                    @foreach(var item in Model)
+                    {
+                        CourseBy="";
+                        @foreach(var teacher in item.Teachers)
+                        {
+                            CourseBy= $" {CourseBy} {teacher.TeacherName}  &";
+                        }
+                     
+               
+
+                <div class="col-lg-2 col-md-3  col-sm-4 course-card">
+                   
+                            <div class="card-image">
+                               <div class="position-top">
+                            @if (item.IsSaved)
+                            {
+                                <div class="save-course" style="background-color:yellow">
+                                    <a href="javascript:void(0)" onclick="SaveCourse(@item.CourseId,1)">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="save-course">
+                                    <a href="javascript:void(0)" onclick="SaveCourse(@item.CourseId,1)">
+                                        <i class="fa-regular fa-bookmark"></i>
+                                    </a>
+                                </div>
+                            }
+                            @if (item.IsBestSeller)
+                            {
+                                <span class="best best-seller">Best Seller</span>
+                            }
+                        </div>
+                                <a asp-action="Details" asp-route-id="@item.CourseId">
+                                   <img src="@item.ImagePath" />
+                                </a>
+                                
+                            </div>
+
+                            <div class="course-card-content">
+                                <h4 class="course-name text-break">@item.CourseName</h4>
+                                 <p class="course-by">
+                                    @CourseBy.TrimEnd('&')
+                                 </p>
+                                 
+                          <div class="course-price">
+                            @if (item.PriceAfterDiscount != 0)
+                            {
+                                <spna class="course-price-1">$@item.PriceAfterDiscount</spna>
+                                <spna class="course-price-2">$@item.Price</spna>
+                            }
+                            else
+                            {
+                                <spna class="course-price-3">$@item.Price</spna>
+                            }
+                           
+                                 </div>
+
+                                 <div class="course-card-footer">
+                            <hr />
+                                     <span class="time">
+                                       <i class="fa-regular fa-clock"></i> <span>@item.NumberOfHours hours</span>
+                                     </span>
+                                     <span class="likes" style="margin-left:20px;">
+                                <a href="javascript:void(0)" onclick="SaveCourse(@item.CourseId,2)" style="text-decoration:none;color:var(--bs-body-color)">
+                                    @if (item.IsLiked)
+                                    {
+                                        <i class="fa-solid fa-thumbs-up"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa-regular fa-thumbs-up"></i>
+                                    }
+                                    
+                                     </a>
+                                     <span> @item.NumberOfLikesResult%</span>
+                                
+                                     </span>
+                                    
+                            <span class="dowinload" style="margin-left:5px;">
+                                        @if (item.iDowinload >= 1000)
+                                        {
+                                        <span>(@item.iDowinload/1000K) </span>
+                                        }
+                                        else
+                                        {
+                                        <span>(@item.iDowinload) </span>
+                                        }
+                                     </span>
+                                 </div>
+                            </div>
+                          
+                  </div>
+                   
+                }
+          
+
+           
+        </div>
+    </div>
+</div>

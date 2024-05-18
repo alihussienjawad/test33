@@ -1,0 +1,39 @@
+﻿ @model EditUserRole
+@{
+    ViewBag.title = "Edit Roles";
+
+}
+<form asp-action="EditRole" method="post">
+    <input type="hidden" asp-for="@Model.User.Id" />
+<div class="row">
+    <div class="col-12">
+        <h5>Edit Roles For The User :</h5>
+        <h6>@Model.User.FullName</h6>
+        <hr/>
+    </div>
+    <div class="col-12 mt-2">
+        <div class="form-check">
+            @for (int i = 0; i < Model.Roles.Count(); i++)
+            {
+                <input type="hidden" asp-for="@Model.Roles[i].Id"/>
+                <input type="hidden" asp-for="@Model.Roles[i].Name"/>
+        
+                <div class="form-check m-1 userUnitDiv">
+                    <label class="form-check-label " asp-for="@Model.Roles[i].IsSelected">
+                        @Model.Roles[i].Name
+                    </label>
+                    <input asp-for="@Model.Roles[i].IsSelected" type="checkbox" class="form-check-input idrow" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-md btn-outline-success" />|
+            <a asp-action="Index" class="btn btn-md btn-outline-secondary">Cancel</a>
+        </div>
+    </div>
+</div>
+</form>

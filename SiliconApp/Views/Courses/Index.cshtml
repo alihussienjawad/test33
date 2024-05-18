@@ -1,0 +1,28 @@
+﻿@model IEnumerable<SiliconApp.Models.Course>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (User.IsInRole("Admin"))
+{
+    <partial name="_indexCourseAdmin" />
+}
+else
+{
+    <form asp-action="_indexCourseUser" id="form-course"
+          data-ajax="true"
+          data-ajax-mode="replace"
+          data-ajax-method="Get"
+          data-ajax-update="#course-content"
+          data-ajax-loading="#pl"
+          >
+
+
+        <div id="course-content">
+
+                 <partial name="_indexCourseUser" />
+          </div>
+    </form>
+  
+}
